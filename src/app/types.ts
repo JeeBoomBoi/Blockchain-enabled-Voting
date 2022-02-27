@@ -4,6 +4,7 @@ export interface Poll {
   results: number[], // result for an option
   options: string[],
   thumbnail: string;
+  voted: boolean,
 }
 
 export interface Voter {

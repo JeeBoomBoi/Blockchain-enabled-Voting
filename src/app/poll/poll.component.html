@@ -1,14 +1,14 @@
 <div class="card mb-4">
   <div class="poll-image">
-    <img src="https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
+    <img [src]="pollImage" alt="">
   </div>
   <div class="card-body">
     <p class="card-text text-truncate font-weight-bold">
-      Do you like cats or dogs?
+      {{ question }}
     </p>
     <div class="d-flex justify-content-between">
-      <small class="text-muted">10 votes</small>
-      <small class="text-muted">Voted</small>
+      <small class="text-muted">{{ numberOfVotes }}</small>
+      <small *ngIf="voted" class="badge badge-success">Voted</small>
     </div>
   </div>
 </div>

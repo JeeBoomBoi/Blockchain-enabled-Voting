@@ -11,7 +11,7 @@ export class Web3Service {
 
   private web3: Web3;
   private contract: Contract;
-  private contractAddress: "0x6501799DDAf9f61b43E28B3708695DECA9DD5bcb"
+  private contractAddress = "0x6501799DDAf9f61b43E28B3708695DECA9DD5bcb"
 
 
   constructor() {
@@ -29,5 +29,19 @@ export class Web3Service {
     } else {
       console.warn("Metamask not found. Install or enable Metamask.")
     }
+  }
+
+  getAccount(): Promise<string> {
+    return this.web3.eth.getAccounts().then((accounts) => accounts[0] || '');
+  }
+
+  async executeTransaction(fnName: string, ...args: any[]): Promise<void> {
+    const acc = await this.getAccount()
+    this.contract.methods[fnName](...args).send({ from: acc });
+  }
+
+  async call(fnName: string, ...args: any[]) {
+    const acc = await this.getAccount()
+    return this.contract.methods[fnName](...args).call({ from: acc });
   }
 }
